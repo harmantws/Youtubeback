@@ -197,3 +197,14 @@ class VerifyChildLoginAPIView(APIView):
                 return Response({"message": "Invalid or expired verification code.", "status": False}, status=status.HTTP_400_BAD_REQUEST)
         
         return Response({"message": "User does not exist or is not a child.", "status": False}, status=status.HTTP_404_NOT_FOUND)
+    
+class UserLogoutAPIView(APIView):
+    authentication_classes = []
+    def get(self, request):
+        logout(request)
+        response = Response({"msg": "Successfully logged out.", "status": True}, status=status.HTTP_200_OK)
+        response.delete_cookie('access')
+        response.delete_cookie('refresh')
+        response.delete_cookie('csrftoken')
+        response.delete_cookie('sessionid')
+        return response

@@ -69,10 +69,3 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ('user','first_name','last_name', 'dob', 'gender')
 
-class QuerySerializer(serializers.Serializer):
-    query = serializers.CharField(required=True)
-
-class NotAllowedSearchesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = NotAllowedSearches
-        fields = ['searches', 'created_at']
